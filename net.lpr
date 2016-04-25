@@ -4,10 +4,11 @@ library net;
 {$DEFINE USE_BIN_STR}
 
 uses
-  Classes, sysutils, laz_synapse, httpsend, synautil, blcksock, dnssend;
+  Classes, sysutils, laz_synapse, httpsend, synautil, blcksock;
 
 var
   FHttp : THTTPSend;
+  TcpSockets : array of TTCPBlockSocket;
 
 function HttpGet(aURL: string; aTimeout: Integer): string;
 begin
@@ -75,7 +76,63 @@ function GetLocalIPs: string;
 begin
   //Result := GetLocalIPs;
 end;
-
+function TCPCreateSocket : Integer;
+var
+  i: Integer;
+  aSock: TTCPBlockSocket;
+begin
+  Result := -1;
+  aSock := TTCPBlockSocket.Create;
+  for i := 0 to high(TcpSockets) do
+    if TcpSockets[i] = nil then
+      begin
+        TcpSockets[i] := aSock;
+        Result := i;
+        break;
+      end;
+  if Result = -1 then
+    begin
+      SetLength(TcpSockets,length(TcpSockets)+1);
+      Result := length(TcpSockets)-1;
+      TcpSockets[Result] := aSock;
+    end;
+end;
+function TCPDestroySocket(Id : Integer) : Boolean;
+begin
+  Result := False;
+  if Id < length(TcpSockets) then
+    begin
+      TcpSockets[Id].Destroy;
+      TcpSockets[Id] := nil;
+      Result := True;
+    end;
+end;
+function TCPConnect(Id : Integer;IP : PChar;Port : Integer) : Boolean;
+begin
+  Result := False;
+  if Id < length(TcpSockets) then
+    begin
+      TcpSockets[Id].Connect(Ip,IntToStr(Port));
+      Result := TcpSockets[Id].LastError=0;
+    end;
+end;
+function TCPSendString(Id : Integer;Data : PChar) : Boolean;
+begin
+  Result := False;
+  if Id < length(TcpSockets) then
+    begin
+      TcpSockets[Id].SendString(Data);
+      Result := True;
+    end;
+end;
+function TCPReceiveString(Id : Integer;Timeout : Integer) : PChar;
+begin
+  Result := PChar('');
+  if Id < length(TcpSockets) then
+    begin
+      Result := PChar(TcpSockets[Id].RecvBlock(Timeout));
+    end;
+end;
 
 function ScriptDefinition : PChar;stdcall;
 begin
@@ -94,6 +151,11 @@ begin
        //+#10+'function HTTPEncode(const str : String) : string;'
        //+#10+'function HTMLEncode(const str : String) : string;'
        //+#10+'function HTMLDecode(const str : String) : string;'
+       +#10+'function TCPCreateSocket : Integer;'
+       +#10+'function TCPDestroySocket(Id : Integer) : Boolean;'
+       +#10+'function TCPConnect(Id : Integer;IP : PChar;Port : Integer) : Boolean;'
+       +#10+'function TCPSendString(Id : Integer;Data : PChar) : Boolean;'
+       +#10+'function TCPReceiveString(Id : Integer;Timeout : Integer) : PChar;'
        ;
 end;
 
@@ -113,6 +175,11 @@ exports
   //HTTPEncode,
   //HTMLEncode,
   //HTMLDecode,
+  TCPCreateSocket,
+  TCPDestroySocket,
+  TCPConnect,
+  TCPSendString,
+  TCPReceiveString,
   ScriptDefinition;
 
 initialization

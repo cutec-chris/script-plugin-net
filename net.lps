@@ -4,15 +4,16 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="25">
+    <Units Count="26">
       <Unit0>
         <Filename Value="net.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
         <WindowIndex Value="1"/>
-        <CursorPos X="10" Y="96"/>
-        <FoldState Value=" T3B0BB_"/>
-        <UsageCount Value="69"/>
+        <TopLine Value="67"/>
+        <CursorPos Y="159"/>
+        <FoldState Value=" T3C0BE pibjK081:"/>
+        <UsageCount Value="71"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -194,8 +195,17 @@
         <TopLine Value="43"/>
         <UsageCount Value="10"/>
       </Unit24>
+      <Unit25>
+        <Filename Value="..\..\..\components\synapse\blcksock.pas"/>
+        <EditorIndex Value="1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="989"/>
+        <CursorPos X="15" Y="1011"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+      </Unit25>
     </Units>
-    <JumpHistory Count="8" HistoryIndex="7">
+    <JumpHistory Count="19" HistoryIndex="18">
       <Position1>
         <Filename Value="net.lpr"/>
         <Caret Line="30"/>
@@ -228,6 +238,50 @@
         <Filename Value="net.lpr"/>
         <Caret Line="118" Column="3" TopLine="86"/>
       </Position8>
+      <Position9>
+        <Filename Value="net.lpr"/>
+        <Caret Line="7" Column="58"/>
+      </Position9>
+      <Position10>
+        <Filename Value="net.lpr"/>
+        <Caret Line="97" Column="34" TopLine="39"/>
+      </Position10>
+      <Position11>
+        <Filename Value="net.lpr"/>
+        <Caret Line="11" Column="32"/>
+      </Position11>
+      <Position12>
+        <Filename Value="..\..\..\components\synapse\blcksock.pas"/>
+        <Caret Line="1042" Column="98" TopLine="1030"/>
+      </Position12>
+      <Position13>
+        <Filename Value="net.lpr"/>
+        <Caret Line="85" Column="27" TopLine="67"/>
+      </Position13>
+      <Position14>
+        <Filename Value="net.lpr"/>
+        <Caret Line="82" Column="25" TopLine="67"/>
+      </Position14>
+      <Position15>
+        <Filename Value="net.lpr"/>
+        <Caret Line="115" Column="26" TopLine="75"/>
+      </Position15>
+      <Position16>
+        <Filename Value="net.lpr"/>
+        <Caret Line="121" Column="22" TopLine="90"/>
+      </Position16>
+      <Position17>
+        <Filename Value="net.lpr"/>
+        <Caret Line="124" Column="49" TopLine="97"/>
+      </Position17>
+      <Position18>
+        <Filename Value="net.lpr"/>
+        <Caret Line="115" Column="26" TopLine="75"/>
+      </Position18>
+      <Position19>
+        <Filename Value="net.lpr"/>
+        <Caret Line="116" Column="39" TopLine="94"/>
+      </Position19>
     </JumpHistory>
   </ProjectSession>
   <Debugging>
