@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="9"/>
+    <BuildModes Active="Default"/>
+    <Units Count="25">
+      <Unit0>
+        <Filename Value="net.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
+        <WindowIndex Value="1"/>
+        <CursorPos X="10" Y="96"/>
+        <FoldState Value=" T3B0BB_"/>
+        <UsageCount Value="69"/>
+        <Loaded Value="True"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="..\..\..\..\tcscmd_git\src\tcsbus\utcsbus.pas"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="1077"/>
+        <CursorPos Y="1111"/>
+        <UsageCount Value="69"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="..\..\..\..\tcscmd_git\src\tcsbus\utcsbusinterfaces.pas"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="150"/>
+        <CursorPos X="26" Y="187"/>
+        <UsageCount Value="69"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="..\..\..\..\tcscmd_git\src\tcsbus\utcsinternbus.pas"/>
+        <UsageCount Value="69"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="..\..\..\..\tcscmd_git\src\utcsbusmonitor.pas"/>
+        <ComponentName Value="fMonitor"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <CursorPos X="15" Y="12"/>
+        <UsageCount Value="22"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="..\..\..\..\tcscmd_git\src\tcsbus\D2XXUnit.pas"/>
+        <TopLine Value="196"/>
+        <CursorPos X="44" Y="105"/>
+        <UsageCount Value="20"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="..\..\..\..\tcscmd_git\src\tcsbus\utcswirelessintf.pas"/>
+        <TopLine Value="104"/>
+        <CursorPos X="34" Y="108"/>
+        <UsageCount Value="20"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="C:\Programme\lazarus124\fpc\2.6.4\source\rtl\inc\systemh.inc"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="941"/>
+        <CursorPos X="11" Y="960"/>
+        <UsageCount Value="9"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="..\..\..\..\tcscmd_git\src\mypersistents.pas"/>
+        <TopLine Value="199"/>
+        <CursorPos X="15" Y="217"/>
+        <UsageCount Value="9"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="..\components\synapse\synaser.pas"/>
+        <TopLine Value="327"/>
+        <CursorPos X="3" Y="282"/>
+        <UsageCount Value="11"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="..\components\pascalscript\x86.inc"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="746"/>
+        <CursorPos Y="782"/>
+        <UsageCount Value="9"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="..\..\..\..\tcscmd_git\src\synaser.pas"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="99"/>
+        <CursorPos X="3" Y="119"/>
+        <UsageCount Value="10"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="..\components\pascalscript\uPSR_dll.pas"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="200"/>
+        <CursorPos Y="225"/>
+        <UsageCount Value="9"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="..\components\pascalscript\uPSRuntime.pas"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="7634"/>
+        <CursorPos Y="7643"/>
+        <UsageCount Value="12"/>
+      </Unit13>
+      <Unit14>
+        <Filename Value="C:\Programme\lazarus\lcl\interfaces\win32\win32object.inc"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="360"/>
+        <CursorPos Y="378"/>
+        <UsageCount Value="9"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="C:\Programme\lazarus124\fpc\2.6.4\source\rtl\inc\text.inc"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="180"/>
+        <CursorPos X="7" Y="194"/>
+        <UsageCount Value="9"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="C:\Programme\lazarus124\fpc\2.6.4\source\rtl\inc\system.inc"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="67"/>
+        <CursorPos X="3" Y="86"/>
+        <UsageCount Value="9"/>
+      </Unit16>
+      <Unit17>
+        <Filename Value="C:\Programme\lazarus124\fpc\2.6.4\source\rtl\win\crt.pp"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="851"/>
+        <UsageCount Value="9"/>
+      </Unit17>
+      <Unit18>
+        <Filename Value="C:\Programme\lazarus124\fpc\2.6.4\source\packages\fcl-process\src\dbugintf.pp"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="34"/>
+        <UsageCount Value="9"/>
+      </Unit18>
+      <Unit19>
+        <Filename Value="..\..\..\..\tcscmd_git\src\tcsbus\uinternbusinterfaces.pas"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="126"/>
+        <UsageCount Value="12"/>
+      </Unit19>
+      <Unit20>
+        <Filename Value="..\components\pascalscript\Source\uPSR_dll.pas"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="195"/>
+        <CursorPos X="33" Y="214"/>
+        <UsageCount Value="11"/>
+      </Unit20>
+      <Unit21>
+        <Filename Value="..\hexfiles\uhexbuffer.pas"/>
+        <UnitName Value="uHexBuffer"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="111"/>
+        <CursorPos X="13" Y="137"/>
+        <UsageCount Value="10"/>
+      </Unit21>
+      <Unit22>
+        <Filename Value="..\..\..\general\src\Utils.pas"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="23"/>
+        <CursorPos X="10" Y="66"/>
+        <UsageCount Value="10"/>
+      </Unit22>
+      <Unit23>
+        <Filename Value="..\components\pascalscript\Source\x86.inc"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="145"/>
+        <CursorPos Y="163"/>
+        <UsageCount Value="10"/>
+      </Unit23>
+      <Unit24>
+        <Filename Value="..\..\..\components\synapse\dnssend.pas"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="43"/>
+        <UsageCount Value="10"/>
+      </Unit24>
+    </Units>
+    <JumpHistory Count="8" HistoryIndex="7">
+      <Position1>
+        <Filename Value="net.lpr"/>
+        <Caret Line="30"/>
+      </Position1>
+      <Position2>
+        <Filename Value="net.lpr"/>
+        <Caret Line="34"/>
+      </Position2>
+      <Position3>
+        <Filename Value="net.lpr"/>
+        <Caret Line="10" Column="25"/>
+      </Position3>
+      <Position4>
+        <Filename Value="net.lpr"/>
+        <Caret Line="11"/>
+      </Position4>
+      <Position5>
+        <Filename Value="net.lpr"/>
+        <Caret Line="7" Column="72"/>
+      </Position5>
+      <Position6>
+        <Filename Value="net.lpr"/>
+        <Caret Line="80" Column="5" TopLine="58"/>
+      </Position6>
+      <Position7>
+        <Filename Value="net.lpr"/>
+        <Caret Line="124" Column="14" TopLine="86"/>
+      </Position7>
+      <Position8>
+        <Filename Value="net.lpr"/>
+        <Caret Line="118" Column="3" TopLine="86"/>
+      </Position8>
+    </JumpHistory>
+  </ProjectSession>
+  <Debugging>
+    <BreakPoints Count="1">
+      <Item1>
+        <Kind Value="bpkData"/>
+        <WatchData Value="xbuf"/>
+        <WatchScope Value="wpsGlobal"/>
+        <WatchKind Value="wpkWrite"/>
+        <InitialEnabled Value="False"/>
+      </Item1>
+    </BreakPoints>
+    <Watches Count="1">
+      <Item1>
+        <Expression Value="s"/>
+      </Item1>
+    </Watches>
+  </Debugging>
+</CONFIG>
