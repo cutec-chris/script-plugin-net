@@ -9,6 +9,7 @@ uses
 var
   FHttp : THTTPSend;
   TcpSockets : array of TTCPBlockSocket;
+  UDPSockets : array of TUDPBlockSocket;
 
 function HttpGet(aURL: string; aTimeout: Integer): string;
 begin
@@ -116,13 +117,22 @@ begin
       Result := TcpSockets[Id].LastError=0;
     end;
 end;
+function TCPBind(Id : Integer;IP : PChar;Port : Integer) : Boolean;
+begin
+  Result := False;
+  if Id < length(TcpSockets) then
+    begin
+      TcpSockets[Id].Bind(Ip,IntToStr(Port));
+      Result := TcpSockets[Id].LastError=0;
+    end;
+end;
 function TCPSendString(Id : Integer;Data : PChar) : Boolean;
 begin
   Result := False;
   if Id < length(TcpSockets) then
     begin
       TcpSockets[Id].SendString(Data);
-      Result := True;
+      Result := TcpSockets[Id].LastError=0;
     end;
 end;
 function TCPReceiveString(Id : Integer;Timeout : Integer) : PChar;
@@ -130,7 +140,73 @@ begin
   Result := PChar('');
   if Id < length(TcpSockets) then
     begin
-      Result := PChar(TcpSockets[Id].RecvBlock(Timeout));
+      Result := PChar(TcpSockets[Id].RecvPacket(Timeout));
+    end;
+end;
+function UDPCreateSocket : Integer;
+var
+  i: Integer;
+  aSock: TUDPBlockSocket;
+begin
+  Result := -1;
+  aSock := TUDPBlockSocket.Create;
+  for i := 0 to high(UDPSockets) do
+    if UDPSockets[i] = nil then
+      begin
+        UDPSockets[i] := aSock;
+        Result := i;
+        break;
+      end;
+  if Result = -1 then
+    begin
+      SetLength(UDPSockets,length(UDPSockets)+1);
+      Result := length(UDPSockets)-1;
+      UDPSockets[Result] := aSock;
+    end;
+end;
+function UDPDestroySocket(Id : Integer) : Boolean;
+begin
+  Result := False;
+  if Id < length(UDPSockets) then
+    begin
+      UDPSockets[Id].Destroy;
+      UDPSockets[Id] := nil;
+      Result := True;
+    end;
+end;
+function UDPConnect(Id : Integer;IP : PChar;Port : Integer) : Boolean;
+begin
+  Result := False;
+  if Id < length(UDPSockets) then
+    begin
+      UDPSockets[Id].Connect(Ip,IntToStr(Port));
+      Result := UDPSockets[Id].LastError=0;
+    end;
+end;
+function UDPBind(Id : Integer;IP : PChar;Port : Integer) : Boolean;
+begin
+  Result := False;
+  if Id < length(UDPSockets) then
+    begin
+      UDPSockets[Id].Bind(Ip,IntToStr(Port));
+      Result := UDPSockets[Id].LastError=0;
+    end;
+end;
+function UDPSendString(Id : Integer;Data : PChar) : Boolean;
+begin
+  Result := False;
+  if Id < length(UDPSockets) then
+    begin
+      UDPSockets[Id].SendString(Data);
+      Result := UDPSockets[Id].LastError=0;
+    end;
+end;
+function UDPReceiveString(Id : Integer;Timeout : Integer) : PChar;
+begin
+  Result := PChar('');
+  if Id < length(UDPSockets) then
+    begin
+      Result := PChar(UDPSockets[Id].RecvPacket(Timeout));
     end;
 end;
 
@@ -154,8 +230,15 @@ begin
        +#10+'function TCPCreateSocket : Integer;'
        +#10+'function TCPDestroySocket(Id : Integer) : Boolean;'
        +#10+'function TCPConnect(Id : Integer;IP : PChar;Port : Integer) : Boolean;'
+       +#10+'function TCPBind(Id : Integer;IP : PChar;Port : Integer) : Boolean;'
        +#10+'function TCPSendString(Id : Integer;Data : PChar) : Boolean;'
        +#10+'function TCPReceiveString(Id : Integer;Timeout : Integer) : PChar;'
+       +#10+'function UDPCreateSocket : Integer;'
+       +#10+'function UDPDestroySocket(Id : Integer) : Boolean;'
+       +#10+'function UDPConnect(Id : Integer;IP : PChar;Port : Integer) : Boolean;'
+       +#10+'function UDPBind(Id : Integer;IP : PChar;Port : Integer) : Boolean;'
+       +#10+'function UDPSendString(Id : Integer;Data : PChar) : Boolean;'
+       +#10+'function UDPReceiveString(Id : Integer;Timeout : Integer) : PChar;'
        ;
 end;
 
@@ -178,8 +261,15 @@ exports
   TCPCreateSocket,
   TCPDestroySocket,
   TCPConnect,
+  TCPBind,
   TCPSendString,
   TCPReceiveString,
+  UDPCreateSocket,
+  UDPDestroySocket,
+  UDPConnect,
+  UDPBind,
+  UDPSendString,
+  UDPReceiveString,
   ScriptDefinition;
 
 initialization
