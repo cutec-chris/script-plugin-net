@@ -10,21 +10,27 @@ var
   FHttp : THTTPSend;
   TcpSockets : array of TTCPBlockSocket;
   UDPSockets : array of TUDPBlockSocket;
+  Bound: String = '';
 
-function HttpGet(aURL: string; aTimeout: Integer): string;
+function HttpGet(aURL: PChar; aTimeout: Integer): PChar;
+var
+  ares : string;
 begin
   Fhttp.Timeout:=aTimeout;
   Fhttp.KeepAlive:=false;
   Fhttp.HTTPMethod('GET',aURL);
   if Fhttp.ResultCode=200 then
     begin
-      setlength(Result,Fhttp.Document.Size);
-      Fhttp.Document.Read(Result[1],Fhttp.Document.Size);
+      setlength(ares,Fhttp.Document.Size);
+      Fhttp.Document.Read(aRes[1],Fhttp.Document.Size);
+      Result := PChar(aRes);
     end
   else Result:='';
 end;
-function HttpPost(aURL, Content: string; aTimeout: Integer
-  ): string;
+function HttpPost(aURL, Content: PChar; aTimeout: Integer
+  ): PChar;
+var
+  ares : string;
 begin
   Fhttp := THTTPSend.Create;
   Fhttp.Timeout:=aTimeout;
@@ -32,16 +38,17 @@ begin
   Fhttp.HTTPMethod('POST',aURL);
   if Fhttp.ResultCode=200 then
     begin
-      setlength(Result,Fhttp.Document.Size);
-      Fhttp.Document.Read(Result[1],Fhttp.Document.Size);
+      setlength(ares,Fhttp.Document.Size);
+      Fhttp.Document.Read(ares[1],Fhttp.Document.Size);
+      Result := PChar(aRes);
     end
   else Result:='';
 end;
-procedure HttpSetMimeType(MimeType: string);
+procedure HttpSetMimeType(MimeType: PChar);
 begin
   Fhttp.MimeType:=MimeType;
 end;
-procedure HttpSetUserAgent(UserAgent: string);
+procedure HttpSetUserAgent(UserAgent: PChar);
 begin
   Fhttp.UserAgent:=UserAgent;
 end;
@@ -49,31 +56,107 @@ function HttpGetResult: Integer;
 begin
   Result := Fhttp.ResultCode;
 end;
-function HttpGetHeaders: string;
+function HttpGetHeaders: PChar;
 begin
-  Result := Fhttp.Headers.Text;
+  Result := PChar(Fhttp.Headers.Text);
 end;
-procedure HttpSetHeaders(Headers: string);
+procedure HttpSetHeaders(Headers: PChar);
 begin
   Fhttp.Headers.Text:=Headers;
 end;
-function HttpGetCookies: string;
+function HttpGetCookies: PChar;
 begin
-  Result := Fhttp.Cookies.Text;
+  Result := PChar(Fhttp.Cookies.Text);
 end;
-procedure HttpSetCookies(Headers: string);
+procedure HttpSetCookies(Headers: PChar);
 begin
   Fhttp.Cookies.Text:=Headers;
 end;
 procedure HttpClear;
 begin
   Fhttp.Clear;
+  Bound := IntToHex(Random(MaxInt), 8) + '_Synapse_boundary';
 end;
-function GetDNS: string;
+procedure HttpAddMultipartField(InputFieldName,InputFieldValue : PChar);
+begin
+  WriteStrToStream(Fhttp.Document,
+    '--' + Bound + CRLF +
+    'Content-Disposition: form-data; name=' + AnsiQuotedStr(InputFieldName, '"') + CRLF +
+    'Content-Type: text/plain' + CRLF +
+    CRLF);
+  WriteStrToStream(Fhttp.Document, InputFieldValue);
+  Fhttp.MimeType := 'multipart/form-data; boundary=' + Bound;
+end;
+procedure HttpAddMultipartFile(InputFileFieldName,InputFileName,InputFile : PChar);
+var
+  InputFileData: TFileStream;
+begin
+  WriteStrToStream(Fhttp.Document,
+    CRLF +
+    '--' + Bound + CRLF +
+    'Content-Disposition: form-data; name=' + AnsiQuotedStr(InputFileFieldName, '"') + ';' + CRLF +
+    #9'filename=' + AnsiQuotedStr(InputFileName, '"') + CRLF +
+    'Content-Type: application/octet-string' + CRLF +
+    CRLF);
+  InputFileData := TFileStream.Create(InputFile,fmOpenRead);
+  FHTTP.Document.CopyFrom(InputFileData, 0);
+  InputFileData.Free;
+  Fhttp.MimeType := 'multipart/form-data; boundary=' + Bound;
+end;
+procedure HttpCloseMultipart;
+begin
+  WriteStrToStream(Fhttp.Document,
+    CRLF +
+    '--' + Bound + '--' + CRLF);
+end;
+
+{
+function HttpPostFile(const URL, InputText1FieldName, InputText1, InputText2FieldName, InputText2, InputFileFieldName, InputFileName: string; InputFileData: TStream; ResultData: TStrings): Boolean;
+var
+  HTTP: THTTPSend;
+  Bound: string;
+begin
+  Bound := IntToHex(Random(MaxInt), 8) + '_Synapse_boundary';
+  HTTP := THTTPSend.Create;
+  try
+    WriteStrToStream(HTTP.Document,
+      '--' + Bound + CRLF +
+      'Content-Disposition: form-data; name=' + AnsiQuotedStr(InputText1FieldName, '"') + CRLF +
+      'Content-Type: text/plain' + CRLF +
+      CRLF);
+    WriteStrToStream(HTTP.Document, InputText1);
+    WriteStrToStream(HTTP.Document,
+      CRLF +
+      '--' + Bound + CRLF +
+      'Content-Disposition: form-data; name=' + AnsiQuotedStr(InputText2FieldName, '"') + CRLF +
+      'Content-Type: text/plain' + CRLF +
+      CRLF);
+    WriteStrToStream(HTTP.Document, InputText2);
+    WriteStrToStream(HTTP.Document,
+      CRLF +
+      '--' + Bound + CRLF +
+      'Content-Disposition: form-data; name=' + AnsiQuotedStr(InputFileFieldName, '"') + ';' + CRLF +
+      #9'filename=' + AnsiQuotedStr(InputFileName, '"') + CRLF +
+      'Content-Type: application/octet-string' + CRLF +
+      CRLF);
+    HTTP.Document.CopyFrom(InputFileData, 0);
+    WriteStrToStream(HTTP.Document,
+      CRLF +
+      '--' + Bound + '--' + CRLF);
+    HTTP.MimeType := 'multipart/form-data; boundary=' + Bound;
+    Result := HTTP.HTTPMethod('POST', URL);
+    if Result then
+      ResultData.LoadFromStream(HTTP.Document);
+  finally
+    HTTP.Free;
+  end;
+end;
+}
+function GetDNS: PChar;
 begin
   //Result := GetDNS;
 end;
-function GetLocalIPs: string;
+function GetLocalIPs: PChar;
 begin
   //Result := GetLocalIPs;
 end;
@@ -212,21 +295,24 @@ end;
 
 function ScriptDefinition : PChar;stdcall;
 begin
-  Result := 'function HttpGet(URL : string;aTimeout : Integer) : string;'
-       +#10+'function HttpPost(URL,Content : string;aTimeout : Integer) : string;'
-       +#10+'procedure HttpSetMimeType(MimeType : string);'
-       +#10+'procedure HttpSetuserAgent(UserAgent : string);'
+  Result := 'function HttpGet(URL : PChar;aTimeout : Integer) : PChar;'
+       +#10+'function HttpPost(URL,Content : PChar;aTimeout : Integer) : PChar;'
+       +#10+'procedure HttpSetMimeType(MimeType : PChar);'
+       +#10+'procedure HttpSetuserAgent(UserAgent : PChar);'
        +#10+'function HttpGetResult : Integer;'
        +#10+'procedure HttpClear;'
-       +#10+'function HttpGetHeaders : string;'
-       +#10+'procedure HttpSetHeaders(Headers : string);'
-       +#10+'function HttpGetCookies : string;'
-       +#10+'procedure HttpSetCookies(Headers : string);'
-       +#10+'function GetDNS : string;'
-       +#10+'function GetLocalIPs : string;'
-       //+#10+'function HTTPEncode(const str : String) : string;'
-       //+#10+'function HTMLEncode(const str : String) : string;'
-       //+#10+'function HTMLDecode(const str : String) : string;'
+       +#10+'function HttpGetHeaders : PChar;'
+       +#10+'procedure HttpSetHeaders(Headers : PChar);'
+       +#10+'function HttpGetCookies : PChar;'
+       +#10+'procedure HttpSetCookies(Headers : PChar);'
+       +#10+'procedure HttpAddMultipartField(InputFieldName,InputFieldValue : PChar);'
+       +#10+'procedure HttpAddMultipartFile(InputFileFieldName,InputFileName,InputFile : PChar);'
+       +#10+'procedure HttpCloseMultipart;'
+       +#10+'function GetDNS : PChar;'
+       +#10+'function GetLocalIPs : PChar;'
+       //+#10+'function HTTPEncode(const str : PChar) : PChar;'
+       //+#10+'function HTMLEncode(const str : PChar) : PChar;'
+       //+#10+'function HTMLDecode(const str : PChar) : PChar;'
        +#10+'function TCPCreateSocket : Integer;'
        +#10+'function TCPDestroySocket(Id : Integer) : Boolean;'
        +#10+'function TCPConnect(Id : Integer;IP : PChar;Port : Integer) : Boolean;'
