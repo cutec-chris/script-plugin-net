@@ -32,7 +32,6 @@ function HttpPost(aURL, Content: PChar; aTimeout: Integer
 var
   ares : string;
 begin
-  Fhttp := THTTPSend.Create;
   Fhttp.Timeout:=aTimeout;
   if Content<>'' then
     Fhttp.Document.Write(Content[1],length(Content));
@@ -85,7 +84,7 @@ begin
     'Content-Disposition: form-data; name=' + AnsiQuotedStr(InputFieldName, '"') + CRLF +
     'Content-Type: text/plain' + CRLF +
     CRLF);
-  WriteStrToStream(Fhttp.Document, InputFieldValue);
+  WriteStrToStream(Fhttp.Document, InputFieldValue + CRLF);
   Fhttp.MimeType := 'multipart/form-data; boundary=' + Bound;
 end;
 procedure HttpAddMultipartFile(InputFileFieldName,InputFileName,InputFile : PChar);
@@ -101,13 +100,13 @@ begin
     CRLF);
   InputFileData := TFileStream.Create(InputFile,fmOpenRead);
   FHTTP.Document.CopyFrom(InputFileData, 0);
+  WriteStrToStream(Fhttp.Document,CRLF);
   InputFileData.Free;
   Fhttp.MimeType := 'multipart/form-data; boundary=' + Bound;
 end;
 procedure HttpCloseMultipart;
 begin
   WriteStrToStream(Fhttp.Document,
-    CRLF +
     '--' + Bound + '--' + CRLF);
 end;
 
