@@ -34,7 +34,8 @@ var
 begin
   Fhttp := THTTPSend.Create;
   Fhttp.Timeout:=aTimeout;
-  Fhttp.Document.Write(Content[1],length(Content));
+  if Content<>'' then
+    Fhttp.Document.Write(Content[1],length(Content));
   Fhttp.HTTPMethod('POST',aURL);
   if Fhttp.ResultCode=200 then
     begin
@@ -335,6 +336,9 @@ exports
   HttpSetuserAgent,
   HttpGetResult,
   HttpClear,
+  HttpAddMultipartField,
+  HttpAddMultipartFile,
+  HttpCloseMultipart,
   HttpGetHeaders,
   HttpSetHeaders,
   HttpGetCookies,
