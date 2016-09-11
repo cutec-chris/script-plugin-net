@@ -4,7 +4,7 @@ library net;
 {$DEFINE USE_BIN_STR}
 
 uses
-  Classes, sysutils, laz_synapse, httpsend, synautil, blcksock;
+  Classes, sysutils, laz_synapse, httpsend, synautil, blcksock, general_nogui,Utils;
 
 var
   FHttp : THTTPSend;
@@ -310,9 +310,9 @@ begin
        +#10+'procedure HttpCloseMultipart;'
        +#10+'function GetDNS : PChar;'
        +#10+'function GetLocalIPs : PChar;'
-       //+#10+'function HTTPEncode(const str : PChar) : PChar;'
-       //+#10+'function HTMLEncode(const str : PChar) : PChar;'
-       //+#10+'function HTMLDecode(const str : PChar) : PChar;'
+       +#10+'function HTMLEncode(const str : PChar) : PChar;'
+       +#10+'function HTTPEncode(const str : PChar) : PChar;'
+       +#10+'function HTMLDecode(const str : PChar) : PChar;'
        +#10+'function TCPCreateSocket : Integer;'
        +#10+'function TCPDestroySocket(Id : Integer) : Boolean;'
        +#10+'function TCPConnect(Id : Integer;IP : PChar;Port : Integer) : Boolean;'
@@ -344,9 +344,9 @@ exports
   HttpSetCookies,
   GetDNS,
   GetLocalIPs,
-  //HTTPEncode,
-  //HTMLEncode,
-  //HTMLDecode,
+  HTTPEncode,
+  HTMLEncode,
+  HTMLDecode,
   TCPCreateSocket,
   TCPDestroySocket,
   TCPConnect,
