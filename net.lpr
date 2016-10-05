@@ -4,7 +4,8 @@ library net;
 {$DEFINE USE_BIN_STR}
 
 uses
-  Classes, sysutils, laz_synapse, httpsend, synautil, blcksock;
+  Classes, sysutils, laz_synapse, httpsend, synautil, blcksock,
+  general_nogui,Utils;
 
 var
   FHttp : THTTPSend;
@@ -310,7 +311,7 @@ begin
        +#10+'procedure HttpCloseMultipart;'
        +#10+'function GetDNS : PChar;'
        +#10+'function GetLocalIPs : PChar;'
-       //+#10+'function HTTPEncode(const str : PChar) : PChar;'
+       +#10+'function HTTPEncode(const str : PChar) : PChar;'
        //+#10+'function HTMLEncode(const str : PChar) : PChar;'
        //+#10+'function HTMLDecode(const str : PChar) : PChar;'
        +#10+'function TCPCreateSocket : Integer;'
@@ -326,6 +327,10 @@ begin
        +#10+'function UDPSendString(Id : Integer;Data : PChar) : Boolean;'
        +#10+'function UDPReceiveString(Id : Integer;Timeout : Integer) : PChar;'
        ;
+end;
+procedure ScriptCleanup;stdcall;
+begin
+  FreeAndNil(FHttp);
 end;
 
 exports
@@ -344,7 +349,7 @@ exports
   HttpSetCookies,
   GetDNS,
   GetLocalIPs,
-  //HTTPEncode,
+  HTTPEncode,
   //HTMLEncode,
   //HTMLDecode,
   TCPCreateSocket,
@@ -359,10 +364,11 @@ exports
   UDPBind,
   UDPSendString,
   UDPReceiveString,
-  ScriptDefinition;
+  ScriptDefinition,
+  ScriptCleanup;
 
 initialization
   FHttp := THTTPSend.Create;
 finalization
-  FHttp.Free;
+  FreeAndNil(FHttp);
 end.
