@@ -109,49 +109,24 @@ begin
   WriteStrToStream(Fhttp.Document,
     '--' + Bound + '--' + CRLF);
 end;
-
-{
-function HttpPostFile(const URL, InputText1FieldName, InputText1, InputText2FieldName, InputText2, InputFileFieldName, InputFileName: string; InputFileData: TStream; ResultData: TStrings): Boolean;
-var
-  HTTP: THTTPSend;
-  Bound: string;
+function HttpSaveToFile(aFile : PChar) : Boolean;
 begin
-  Bound := IntToHex(Random(MaxInt), 8) + '_Synapse_boundary';
-  HTTP := THTTPSend.Create;
+  Result := False;
   try
-    WriteStrToStream(HTTP.Document,
-      '--' + Bound + CRLF +
-      'Content-Disposition: form-data; name=' + AnsiQuotedStr(InputText1FieldName, '"') + CRLF +
-      'Content-Type: text/plain' + CRLF +
-      CRLF);
-    WriteStrToStream(HTTP.Document, InputText1);
-    WriteStrToStream(HTTP.Document,
-      CRLF +
-      '--' + Bound + CRLF +
-      'Content-Disposition: form-data; name=' + AnsiQuotedStr(InputText2FieldName, '"') + CRLF +
-      'Content-Type: text/plain' + CRLF +
-      CRLF);
-    WriteStrToStream(HTTP.Document, InputText2);
-    WriteStrToStream(HTTP.Document,
-      CRLF +
-      '--' + Bound + CRLF +
-      'Content-Disposition: form-data; name=' + AnsiQuotedStr(InputFileFieldName, '"') + ';' + CRLF +
-      #9'filename=' + AnsiQuotedStr(InputFileName, '"') + CRLF +
-      'Content-Type: application/octet-string' + CRLF +
-      CRLF);
-    HTTP.Document.CopyFrom(InputFileData, 0);
-    WriteStrToStream(HTTP.Document,
-      CRLF +
-      '--' + Bound + '--' + CRLF);
-    HTTP.MimeType := 'multipart/form-data; boundary=' + Bound;
-    Result := HTTP.HTTPMethod('POST', URL);
-    if Result then
-      ResultData.LoadFromStream(HTTP.Document);
-  finally
-    HTTP.Free;
+    FHttp.Document.SaveToFile(aFile);
+    Result :=  True;
+  except
   end;
 end;
-}
+function HTTPLoadFromFile(aFile : PChar) : Boolean;
+begin
+  Result := False;
+  try
+    FHttp.Document.LoadFromFile(aFile);
+    Result :=  True;
+  except
+  end;
+end;
 function GetDNS: PChar;
 begin
   //Result := GetDNS;
@@ -308,6 +283,8 @@ begin
        +#10+'procedure HttpAddMultipartField(InputFieldName,InputFieldValue : PChar);'
        +#10+'procedure HttpAddMultipartFile(InputFileFieldName,InputFileName,InputFile : PChar);'
        +#10+'procedure HttpCloseMultipart;'
+       +#10+'function HttpSaveToFile(aFile : PChar) : Boolean;'
+       +#10+'function HTTPLoadFromFile(aFile : PChar) : Boolean;'
        +#10+'function GetDNS : PChar;'
        +#10+'function GetLocalIPs : PChar;'
        //+#10+'function HTMLEncode(const str : PChar) : PChar;'
@@ -342,6 +319,8 @@ exports
   HttpSetHeaders,
   HttpGetCookies,
   HttpSetCookies,
+  HttpSaveToFile,
+  HTTPLoadFromFile,
   GetDNS,
   GetLocalIPs,
   HTTPEncode,
