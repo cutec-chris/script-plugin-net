@@ -5,7 +5,7 @@ library net;
 
 uses
   Classes, sysutils, laz_synapse, httpsend, synautil, blcksock, synsock,
-  general_nogui, Utils;
+  general_nogui, Utils,ssl_openssl;
 
 var
   FHttp : THTTPSend;
@@ -223,6 +223,7 @@ begin
                   TcpSockets[Result] := aSock;
                 end;
               aSock.Socket:=bSock;
+              aSock.SSLAcceptConnection;
             end;
         end;
     end;

@@ -10,9 +10,8 @@
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="155"/>
-        <CursorPos Y="207"/>
-        <FoldState Value=" T3F0ED piZjK0821418]DXl]D1n"/>
+        <CursorPos X="35" Y="8"/>
+        <FoldState Value=" T3F0ED piZjK08214186"/>
         <UsageCount Value="81"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -265,123 +264,123 @@
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="..\..\..\components\synapse\httpsend.pas"/>
-        <Caret Line="409" TopLine="372"/>
+        <Caret Line="411" TopLine="374"/>
       </Position1>
       <Position2>
         <Filename Value="..\..\..\components\synapse\httpsend.pas"/>
-        <Caret Line="411" TopLine="374"/>
+        <Caret Line="421" TopLine="400"/>
       </Position2>
       <Position3>
         <Filename Value="..\..\..\components\synapse\httpsend.pas"/>
-        <Caret Line="421" TopLine="400"/>
+        <Caret Line="422" TopLine="400"/>
       </Position3>
       <Position4>
         <Filename Value="..\..\..\components\synapse\httpsend.pas"/>
-        <Caret Line="422" TopLine="400"/>
+        <Caret Line="423" TopLine="400"/>
       </Position4>
       <Position5>
         <Filename Value="..\..\..\components\synapse\httpsend.pas"/>
-        <Caret Line="423" TopLine="400"/>
+        <Caret Line="424" TopLine="400"/>
       </Position5>
       <Position6>
         <Filename Value="..\..\..\components\synapse\httpsend.pas"/>
-        <Caret Line="424" TopLine="400"/>
+        <Caret Line="425" TopLine="400"/>
       </Position6>
       <Position7>
         <Filename Value="..\..\..\components\synapse\httpsend.pas"/>
-        <Caret Line="425" TopLine="400"/>
+        <Caret Line="427" TopLine="400"/>
       </Position7>
       <Position8>
         <Filename Value="..\..\..\components\synapse\httpsend.pas"/>
-        <Caret Line="427" TopLine="400"/>
+        <Caret Line="428" TopLine="400"/>
       </Position8>
       <Position9>
         <Filename Value="..\..\..\components\synapse\httpsend.pas"/>
-        <Caret Line="428" TopLine="400"/>
+        <Caret Line="430" TopLine="400"/>
       </Position9>
       <Position10>
         <Filename Value="..\..\..\components\synapse\httpsend.pas"/>
-        <Caret Line="430" TopLine="400"/>
+        <Caret Line="431" TopLine="400"/>
       </Position10>
       <Position11>
         <Filename Value="..\..\..\components\synapse\httpsend.pas"/>
-        <Caret Line="431" TopLine="400"/>
+        <Caret Line="433" TopLine="400"/>
       </Position11>
       <Position12>
         <Filename Value="..\..\..\components\synapse\httpsend.pas"/>
-        <Caret Line="433" TopLine="400"/>
+        <Caret Line="440" TopLine="404"/>
       </Position12>
       <Position13>
         <Filename Value="..\..\..\components\synapse\httpsend.pas"/>
-        <Caret Line="440" TopLine="404"/>
+        <Caret Line="441" TopLine="405"/>
       </Position13>
       <Position14>
         <Filename Value="..\..\..\components\synapse\httpsend.pas"/>
-        <Caret Line="441" TopLine="405"/>
+        <Caret Line="443" TopLine="407"/>
       </Position14>
       <Position15>
         <Filename Value="..\..\..\components\synapse\httpsend.pas"/>
-        <Caret Line="443" TopLine="407"/>
+        <Caret Line="451" TopLine="429"/>
       </Position15>
       <Position16>
         <Filename Value="..\..\..\components\synapse\httpsend.pas"/>
-        <Caret Line="451" TopLine="429"/>
+        <Caret Line="452" TopLine="429"/>
       </Position16>
       <Position17>
         <Filename Value="..\..\..\components\synapse\httpsend.pas"/>
-        <Caret Line="452" TopLine="429"/>
+        <Caret Line="458" TopLine="429"/>
       </Position17>
       <Position18>
         <Filename Value="..\..\..\components\synapse\httpsend.pas"/>
-        <Caret Line="458" TopLine="429"/>
+        <Caret Line="461" TopLine="429"/>
       </Position18>
       <Position19>
         <Filename Value="..\..\..\components\synapse\httpsend.pas"/>
-        <Caret Line="461" TopLine="429"/>
+        <Caret Line="462" TopLine="429"/>
       </Position19>
       <Position20>
         <Filename Value="..\..\..\components\synapse\httpsend.pas"/>
-        <Caret Line="462" TopLine="429"/>
+        <Caret Line="464" TopLine="429"/>
       </Position20>
       <Position21>
         <Filename Value="..\..\..\components\synapse\httpsend.pas"/>
-        <Caret Line="464" TopLine="429"/>
+        <Caret Line="470" TopLine="434"/>
       </Position21>
       <Position22>
-        <Filename Value="..\..\..\components\synapse\httpsend.pas"/>
-        <Caret Line="470" TopLine="434"/>
+        <Filename Value="net.lpr"/>
+        <Caret Line="192" Column="25" TopLine="30"/>
       </Position22>
       <Position23>
         <Filename Value="net.lpr"/>
-        <Caret Line="192" Column="25" TopLine="30"/>
+        <Caret Line="199" Column="13" TopLine="64"/>
       </Position23>
       <Position24>
         <Filename Value="net.lpr"/>
-        <Caret Line="199" Column="13" TopLine="64"/>
+        <Caret Line="204" Column="35" TopLine="140"/>
       </Position24>
       <Position25>
         <Filename Value="net.lpr"/>
-        <Caret Line="204" Column="35" TopLine="140"/>
+        <Caret Line="221" Column="17" TopLine="155"/>
       </Position25>
       <Position26>
         <Filename Value="net.lpr"/>
-        <Caret Line="221" Column="17" TopLine="155"/>
+        <Caret Line="222" Column="30" TopLine="200"/>
       </Position26>
       <Position27>
         <Filename Value="net.lpr"/>
-        <Caret Line="222" Column="30" TopLine="200"/>
+        <Caret Line="199" Column="12" TopLine="170"/>
       </Position27>
       <Position28>
         <Filename Value="net.lpr"/>
-        <Caret Line="199" Column="12" TopLine="170"/>
+        <Caret Line="206" Column="18" TopLine="179"/>
       </Position28>
       <Position29>
         <Filename Value="net.lpr"/>
-        <Caret Line="206" Column="18" TopLine="179"/>
+        <Caret Line="197" Column="32" TopLine="155"/>
       </Position29>
       <Position30>
         <Filename Value="net.lpr"/>
-        <Caret Line="197" Column="32" TopLine="155"/>
+        <Caret Line="226" Column="20" TopLine="157"/>
       </Position30>
     </JumpHistory>
   </ProjectSession>
