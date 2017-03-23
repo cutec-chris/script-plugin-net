@@ -4,7 +4,8 @@ library net;
 {$DEFINE USE_BIN_STR}
 
 uses
-  Classes, sysutils, laz_synapse, httpsend, synautil, blcksock, general_nogui,Utils;
+  Classes, sysutils, laz_synapse, httpsend, synautil, blcksock, synsock,
+  general_nogui, Utils;
 
 var
   FHttp : THTTPSend;
@@ -184,6 +185,48 @@ begin
       Result := TcpSockets[Id].LastError=0;
     end;
 end;
+function TCPListen(Id : Integer) : Boolean;
+begin
+  Result := False;
+  if Id < length(TcpSockets) then
+    begin
+      TcpSockets[Id].Listen;
+      Result := TcpSockets[Id].LastError=0;
+    end;
+end;
+function TCPAccept(Id : Integer;Timeout : Integer) : Integer;
+var
+  bSock: TSocket;
+  aSock: TTCPBlockSocket;
+  i: Integer;
+begin
+  Result := -1;
+  if Id < length(TcpSockets) then
+    begin
+      if TcpSockets[Id].CanRead(Timeout) then
+        begin
+          bSock := TcpSockets[Id].Accept;
+          if bSock<>0 then
+            begin
+              aSock := TTCPBlockSocket.Create;
+              for i := 0 to high(TcpSockets) do
+                if TcpSockets[i] = nil then
+                  begin
+                    TcpSockets[i] := aSock;
+                    Result := i;
+                    break;
+                  end;
+              if Result = -1 then
+                begin
+                  SetLength(TcpSockets,length(TcpSockets)+1);
+                  Result := length(TcpSockets)-1;
+                  TcpSockets[Result] := aSock;
+                end;
+              aSock.Socket:=bSock;
+            end;
+        end;
+    end;
+end;
 function TCPSendString(Id : Integer;Data : PChar) : Boolean;
 begin
   Result := False;
@@ -312,6 +355,8 @@ begin
        +#10+'function TCPDestroySocket(Id : Integer) : Boolean;'
        +#10+'function TCPConnect(Id : Integer;IP : PChar;Port : Integer) : Boolean;'
        +#10+'function TCPBind(Id : Integer;IP : PChar;Port : Integer) : Boolean;'
+       +#10+'function TCPListen(Id : Integer) : Boolean;'
+       +#10+'function TCPAccept(Id : Integer;Timeout : Integer) : Integer;'
        +#10+'function TCPSendString(Id : Integer;Data : PChar) : Boolean;'
        +#10+'function TCPReceiveString(Id : Integer;Timeout : Integer) : PChar;'
        +#10+'function UDPCreateSocket : Integer;'
@@ -350,6 +395,8 @@ exports
   TCPDestroySocket,
   TCPConnect,
   TCPBind,
+  TCPListen,
+  TCPAccept,
   TCPSendString,
   TCPReceiveString,
   UDPCreateSocket,
