@@ -232,6 +232,24 @@ begin
       Result := True;
     end;
 end;
+function UDPMulticastTTL(Id : Integer;TTL : Integer) : Boolean;
+begin
+  Result := False;
+  if Id < length(UDPSockets) then
+    begin
+      UDPSockets[Id].MulticastTTL:=TTL;
+      Result := True;
+    end;
+end;
+function UDPAddMulticast(Id : Integer;IP : PChar) : Boolean;
+begin
+  Result := False;
+  if Id < length(UDPSockets) then
+    begin
+      UDPSockets[Id].AddMulticast(IP);
+      Result := True;
+    end;
+end;
 function UDPConnect(Id : Integer;IP : PChar;Port : Integer) : Boolean;
 begin
   Result := False;
@@ -297,6 +315,8 @@ begin
        +#10+'function TCPSendString(Id : Integer;Data : PChar) : Boolean;'
        +#10+'function TCPReceiveString(Id : Integer;Timeout : Integer) : PChar;'
        +#10+'function UDPCreateSocket : Integer;'
+       +#10+'function UDPMulticastTTL(Id : Integer;TTL : Integer) : Boolean;'
+       +#10+'function UDPAddMulticast(Id : Integer;IP : PChar) : Boolean;'
        +#10+'function UDPDestroySocket(Id : Integer) : Boolean;'
        +#10+'function UDPConnect(Id : Integer;IP : PChar;Port : Integer) : Boolean;'
        +#10+'function UDPBind(Id : Integer;IP : PChar;Port : Integer) : Boolean;'
@@ -334,6 +354,8 @@ exports
   TCPReceiveString,
   UDPCreateSocket,
   UDPDestroySocket,
+  UDPMulticastTTL,
+  UDPAddMulticast,
   UDPConnect,
   UDPBind,
   UDPSendString,
